@@ -29,7 +29,13 @@ public class Search
 		return binarySearch(x, a, 0, a.length - 1);
 	}
 
-
+	/**
+	 * @param x          value to find
+	 * @param a          array
+	 * @param startIndex begging of the range
+	 * @param endIndex   end of the range
+	 * @return x index in array
+	 */
 	public static int binarySearch(int x, int[] a, int startIndex, int endIndex)
 	{
 		if (startIndex > endIndex)
@@ -37,12 +43,11 @@ public class Search
 			return -1;
 		}
 
-//		int mid = a.length / 2;
 		int mid = (startIndex + endIndex) / 2;
 
 		if (a[mid] == x)
 		{
-			return mid;
+			return getLowestIndex(x,a,startIndex,mid);
 		}
 		else if (x > a[mid])
 		{
@@ -52,5 +57,26 @@ public class Search
 		{
 			return binarySearch(x, a, startIndex, mid - 1);
 		}
+	}
+
+	/**
+	 * Finds lowest index when value is found
+	 *
+	 * @param x          value to find
+	 * @param a          array
+	 * @param startIndex begging of the range
+	 * @param endIndex   end of the range
+	 */
+	private static int getLowestIndex(int x, int[] a, int startIndex, int endIndex)
+	{
+		for (int i = endIndex; i >= startIndex; i--)
+		{
+			if (a[i] != x)
+			{
+				return i + 1;
+			}
+		}
+
+		return startIndex;
 	}
 }
